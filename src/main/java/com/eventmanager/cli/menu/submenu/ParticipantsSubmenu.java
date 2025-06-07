@@ -1,6 +1,8 @@
-package com.eventmanager.menu.submenu;
+package com.eventmanager.cli.menu.submenu;
 
 import java.util.Scanner;
+
+import com.eventmanager.util.MenuUtils;
 
 public class ParticipantsSubmenu {
 
@@ -10,7 +12,7 @@ public class ParticipantsSubmenu {
         int opcao;
 
         do {
-            clearScreen();
+            MenuUtils.clearScreen();
 
             System.out.println("=== PARTICIPANTS SUBMENU ===");
             System.out.println("1. Add Participant");
@@ -20,7 +22,7 @@ public class ParticipantsSubmenu {
             System.out.println("5. Enroll Participant in an Event");
             System.out.println("6. List all Participants registered in the System");
             System.out.println("7. Generate Participant Certificate");
-            System.out.println("0. Go back to Main Menu");
+            System.out.println("0. Go back to Main Menu\n");
             System.out.print("Select an option: ");
 
             opcao = scanner.nextInt();
@@ -28,60 +30,52 @@ public class ParticipantsSubmenu {
 
             switch (opcao) {
                 case 1 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Participante adicionado.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 2 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Participante buscado.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 3 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Participante atualizado.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 4 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Participante removido.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 5 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Participante inscrito em evento.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 6 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Todos os participantes foram listados.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 7 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação] Certificado do participante foi gerado.");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 0 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                 }
                 default -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("Opção inválida. Tente novamente.");
-                    pause();
+                    MenuUtils.pause();
                 }
             }
 
         } while (opcao != 0);
     }
 
-    private static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
 
-    private static void pause() {
-        System.out.println("\nPressione Enter para continuar...");
-        scanner.nextLine();
-    }
 }

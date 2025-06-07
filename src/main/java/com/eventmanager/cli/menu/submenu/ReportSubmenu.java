@@ -1,6 +1,8 @@
-package com.eventmanager.menu.submenu;
+package com.eventmanager.cli.menu.submenu;
 
 import java.util.Scanner;
+
+import com.eventmanager.util.MenuUtils;
 
 public class ReportSubmenu {
 
@@ -10,12 +12,12 @@ public class ReportSubmenu {
         int opcao;
 
         do {
-            clearScreen();
+            MenuUtils.clearScreen();
 
             System.out.println("=== REPORT SUBMENU ===");
             System.out.println("1. Report by Type of Event");
             System.out.println("2. Report by Date");
-            System.out.println("0. Go back to Main Menu");
+            System.out.println("0. Go back to Main Menu\n");
             System.out.print("Select an option: ");
 
             opcao = scanner.nextInt();
@@ -23,35 +25,26 @@ public class ReportSubmenu {
 
             switch (opcao) {
                 case 1 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 2 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 0 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                 }
                 default -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("Opção inválida. Tente novamente.");
-                    pause();
+                    MenuUtils.pause();
                 }
             }
 
         } while (opcao != 0);
     }
 
-    private static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    private static void pause() {
-        System.out.println("\nPressione Enter para continuar...");
-        scanner.nextLine();
-    }
 }

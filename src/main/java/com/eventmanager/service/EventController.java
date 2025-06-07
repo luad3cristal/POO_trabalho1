@@ -1,4 +1,4 @@
-package com.eventmanager.controller;
+package com.eventmanager.service;
 
 // import java.util.Scanner;
 

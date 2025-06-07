@@ -1,6 +1,8 @@
-package com.eventmanager.menu.submenu;
+package com.eventmanager.cli.menu.submenu;
 
 import java.util.Scanner;
+
+import com.eventmanager.util.MenuUtils;
 
 public class EventSubmenu {
 
@@ -10,14 +12,14 @@ public class EventSubmenu {
         int opcao;
 
         do {
-            clearScreen();
+            MenuUtils.clearScreen();
 
             System.out.println("=== EVENT SUBMENU ===");
             System.out.println("1. Create Event");
             System.out.println("2. List all Events");
             System.out.println("3. Update Event");
             System.out.println("4. Delete Event");
-            System.out.println("0. Go back to Main Menu");
+            System.out.println("0. Go back to Main Menu\n");
             System.out.print("Select an option: ");
 
             opcao = scanner.nextInt();
@@ -25,55 +27,45 @@ public class EventSubmenu {
 
             switch (opcao) {
                 case 1 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 2 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 3 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 4 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 5 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 6 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("[Simulação]");
-                    pause();
+                    MenuUtils.pause();
                 }
                 case 0 -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                 }
                 default -> {
-                    clearScreen();
+                    MenuUtils.clearScreen();
                     System.out.println("Opção inválida. Tente novamente.");
-                    pause();
+                    MenuUtils.pause();
                 }
             }
 
         } while (opcao != 0);
-    }
-
-    private static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
-    private static void pause() {
-        System.out.println("\nPressione Enter para continuar...");
-        scanner.nextLine();
     }
 }

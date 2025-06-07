@@ -1,10 +1,10 @@
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\controller\EventController.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\controller\ParticipantController.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\Main.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\Menu.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\submenu\EventSubmenu.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\submenu\ParticipantsSubmenu.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\submenu\ReportSubmenu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\Main.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\Menu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\submenu\EventSubmenu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\submenu\ParticipantsSubmenu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\submenu\ReportSubmenu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\io\Certificate.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\io\EventReport.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Course.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Event.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Fair.java
@@ -15,5 +15,6 @@ C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\participant\E
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\participant\Participant.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\participant\Student.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\participant\Teacher.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\util\Certificate.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\util\EventReport.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\service\EventController.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\service\ParticipantController.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\util\MenuUtils.java

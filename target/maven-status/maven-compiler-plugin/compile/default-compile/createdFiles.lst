@@ -1,6 +1,7 @@
-com\eventmanager\Main.class
-com\eventmanager\menu\submenu\ParticipantsSubmenu.class
-com\eventmanager\menu\submenu\EventSubmenu.class
-com\eventmanager\menu\Menu.class
-com\eventmanager\menu\submenu\ReportSubmenu.class
-com\eventmanager\controller\EventController.class
+com\eventmanager\util\MenuUtils.class
+com\eventmanager\cli\menu\Menu.class
+com\eventmanager\cli\Main.class
+com\eventmanager\service\EventController.class
+com\eventmanager\cli\menu\submenu\EventSubmenu.class
+com\eventmanager\cli\menu\submenu\ParticipantsSubmenu.class
+com\eventmanager\cli\menu\submenu\ReportSubmenu.class
