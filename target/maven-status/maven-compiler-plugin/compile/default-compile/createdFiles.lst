@@ -1,2 +1,6 @@
 com\eventmanager\Main.class
+com\eventmanager\menu\submenu\ParticipantsSubmenu.class
+com\eventmanager\menu\submenu\EventSubmenu.class
 com\eventmanager\menu\Menu.class
+com\eventmanager\menu\submenu\ReportSubmenu.class
+com\eventmanager\controller\EventController.class

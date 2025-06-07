@@ -2,6 +2,9 @@ C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\controller\EventCon
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\controller\ParticipantController.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\Main.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\Menu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\submenu\EventSubmenu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\submenu\ParticipantsSubmenu.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\menu\submenu\ReportSubmenu.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Course.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Event.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Fair.java
