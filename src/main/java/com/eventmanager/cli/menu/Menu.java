@@ -4,9 +4,7 @@ import java.util.Scanner;
 
 import com.eventmanager.util.MenuUtils;
 
-import com.eventmanager.cli.menu.submenu.EventSubmenu;
-import com.eventmanager.cli.menu.submenu.ParticipantsSubmenu;
-import com.eventmanager.cli.menu.submenu.ReportSubmenu;
+import com.eventmanager.cli.menu.submenu.*;
 
 public class Menu {
 
