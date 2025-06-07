@@ -12,13 +12,9 @@ public class ReportSubmenu {
         do {
             clearScreen();
 
-            System.out.println("=== EVENT SUBMENU ===");
-            System.out.println("1. Add Participant");
-            System.out.println("2. Search Participant");
-            System.out.println("3. Update Participant Data");
-            System.out.println("4. Remove Participant Data");
-            System.out.println("5. List Registered Participants");
-            System.out.println("6. Generate Participant Certificate");
+            System.out.println("=== REPORT SUBMENU ===");
+            System.out.println("1. Report by Type of Event");
+            System.out.println("2. Report by Date");
             System.out.println("0. Go back to Main Menu");
             System.out.print("Select an option: ");
 
@@ -32,26 +28,6 @@ public class ReportSubmenu {
                     pause();
                 }
                 case 2 -> {
-                    clearScreen();
-                    System.out.println("[Simulação]");
-                    pause();
-                }
-                case 3 -> {
-                    clearScreen();
-                    System.out.println("[Simulação]");
-                    pause();
-                }
-                case 4 -> {
-                    clearScreen();
-                    System.out.println("[Simulação]");
-                    pause();
-                }
-                case 5 -> {
-                    clearScreen();
-                    System.out.println("[Simulação]");
-                    pause();
-                }
-                case 6 -> {
                     clearScreen();
                     System.out.println("[Simulação]");
                     pause();

@@ -13,12 +13,10 @@ public class EventSubmenu {
             clearScreen();
 
             System.out.println("=== EVENT SUBMENU ===");
-            System.out.println("1. Add Participant");
-            System.out.println("2. Search Participant");
-            System.out.println("3. Update Participant Data");
-            System.out.println("4. Remove Participant Data");
-            System.out.println("5. List Registered Participants");
-            System.out.println("6. Generate Participant Certificate");
+            System.out.println("1. Create Event");
+            System.out.println("2. List all Events");
+            System.out.println("3. Update Event");
+            System.out.println("4. Delete Event");
             System.out.println("0. Go back to Main Menu");
             System.out.print("Select an option: ");
 

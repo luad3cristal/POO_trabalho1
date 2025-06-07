@@ -12,13 +12,14 @@ public class ParticipantsSubmenu {
         do {
             clearScreen();
 
-            System.out.println("=== EVENT SUBMENU ===");
+            System.out.println("=== PARTICIPANTS SUBMENU ===");
             System.out.println("1. Add Participant");
             System.out.println("2. Search Participant");
             System.out.println("3. Update Participant Data");
             System.out.println("4. Remove Participant Data");
-            System.out.println("5. List Registered Participants");
-            System.out.println("6. Generate Participant Certificate");
+            System.out.println("5. Enroll Participant in an Event");
+            System.out.println("6. List all Participants registered in the System");
+            System.out.println("7. Generate Participant Certificate");
             System.out.println("0. Go back to Main Menu");
             System.out.print("Select an option: ");
 
@@ -48,10 +49,15 @@ public class ParticipantsSubmenu {
                 }
                 case 5 -> {
                     clearScreen();
-                    System.out.println("[Simulação] Todos os participantes foram listados.");
+                    System.out.println("[Simulação] Participante inscrito em evento.");
                     pause();
                 }
                 case 6 -> {
+                    clearScreen();
+                    System.out.println("[Simulação] Todos os participantes foram listados.");
+                    pause();
+                }
+                case 7 -> {
                     clearScreen();
                     System.out.println("[Simulação] Certificado do participante foi gerado.");
                     pause();
