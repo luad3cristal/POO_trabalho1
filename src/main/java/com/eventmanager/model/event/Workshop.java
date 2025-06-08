@@ -1,8 +1,45 @@
 package com.eventmanager.model.event;
 
+import  com.eventmanager.model.participant.Participant;
+
 public class Workshop extends Event implements HybridEvent {
+    private boolean  online;
+    private boolean  inPerson;
+    private String onlineLink;
+
     public Workshop (String title, String date, String location, int capacity, String description) {
-        super(title, date, location, capacity, description);
+        super(title, date, location, capacity, "Workshop");
+        this.online = online;
+        this.inPerson = inPerson;
     }
+
+    @Override
+    public void registerParticipant(Participant p) {
+        if (participants.size() > capacity) {
+            System.out.println("Workshop is already full. Cannot register: " + p.getName());
+        }
+
+        participants.add(p);
+    }
+
+
+
+    @Override
+    public void setOnline(boolean online) {this.online = online;}
+    @Override
+    public void setInPerson(boolean inPerson) {this.inPerson = inPerson;}
+    @Override
+    public boolean isOnline() {return online;}
+    @Override
+    public boolean isInPerson() {return inPerson;}
+
+    @Override
+    public void setOnlineLink(String link) {this.onlineLink = link;}
+    @Override
+    public void setLocation(String location) {this.location = location;}
+    @Override
+    public String getOnlineLink() {return onlineLink;}
+    @Override
+    public String getLocation() {return location;}
 
 }

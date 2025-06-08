@@ -1,5 +1,8 @@
 package com.eventmanager.model.event;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.eventmanager.model.participant.Participant;
 
 public abstract class Event {
@@ -8,6 +11,7 @@ public abstract class Event {
     protected String location;
     protected int capacity;
     protected String description;
+    protected List<Participant> participants;
 
     public Event(String title, String date, String location, int capacity, String description) {
         this.title = title;
@@ -15,6 +19,7 @@ public abstract class Event {
         this.location = location;
         this.capacity = capacity;
         this.description = description;
+        this.participants = new ArrayList<>();
     }
 
     public abstract void registerParticipant(Participant p);
@@ -24,4 +29,5 @@ public abstract class Event {
     public String getLocation() { return location; }
     public int getCapacity() { return capacity; }
     public String getDescription() { return description; }
+    public List<Participant> getParticipants() { return participants; }
 }
