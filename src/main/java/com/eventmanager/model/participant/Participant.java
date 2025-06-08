@@ -23,8 +23,8 @@ public abstract class Participant {
         registeredEvents.add(event);
     }
 
+    public String getCpf() { return cpf; }
     public String getName() { return name; }
     public String getEmail() { return email; }
-    public String getCpf() { return cpf; }
     public List<Event> getRegisteredEvents() { return registeredEvents; }
 }

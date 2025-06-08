@@ -7,7 +7,7 @@ public class Workshop extends Event implements HybridEvent {
     private boolean  inPerson;
     private String onlineLink;
 
-    public Workshop (String title, String date, String location, int capacity, String description) {
+    public Workshop (String title, String date, String location, int capacity, String description, boolean online, boolean inPerson) {
         super(title, date, location, capacity, "Workshop");
         this.online = online;
         this.inPerson = inPerson;

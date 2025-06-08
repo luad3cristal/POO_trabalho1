@@ -7,7 +7,7 @@ public class Fair extends Event implements HybridEvent {
     private boolean  inPerson;
     private String onlineLink;
 
-    public Fair (String title, String date, String location, int capacity, String description) {
+    public Fair (String title, String date, String location, int capacity, String description, boolean online, boolean inPerson) {
         super(title, date, location, capacity, "Fair");
         this.online = online;
         this.inPerson = inPerson;

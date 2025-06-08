@@ -1,13 +1,14 @@
 package com.eventmanager.model.event;
 
 import  com.eventmanager.model.participant.Participant;
+import  com.eventmanager.model.participant.Student;
 
 public class Course extends Event implements HybridEvent {
     private boolean  online;
     private boolean  inPerson;
     private String onlineLink;
 
-    public Course (String title, String date, String location, int capacity, String description) {
+    public Course (String title, String date, String location, int capacity, String description, boolean online, boolean inPerson) {
         super(title, date, location, capacity, "Course");
         this.online = online;
         this.inPerson = inPerson;
