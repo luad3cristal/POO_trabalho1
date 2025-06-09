@@ -11,7 +11,7 @@ public class EventController {
   private final List<Event> events = new ArrayList<>();
   
   public void addEvent (Event event) {
-    //
+    events.add(event);
   }
 
   public List<Event> listAllEvents() {
