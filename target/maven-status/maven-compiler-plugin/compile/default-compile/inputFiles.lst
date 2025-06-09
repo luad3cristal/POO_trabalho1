@@ -3,8 +3,8 @@ C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\Menu.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\submenu\EventSubmenu.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\submenu\ParticipantsSubmenu.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\cli\menu\submenu\ReportSubmenu.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\io\Certificate.java
-C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\io\EventReport.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\io\CertificateGenerator.java
+C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\io\ReportGenerator.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Course.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Event.java
 C:\POO_Trabalho1\eventmanager\src\main\java\com\eventmanager\model\event\Fair.java

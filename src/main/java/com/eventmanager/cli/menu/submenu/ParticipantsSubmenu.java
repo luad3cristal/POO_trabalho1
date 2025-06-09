@@ -2,8 +2,12 @@ package com.eventmanager.cli.menu.submenu;
 
 import java.util.Scanner;
 
-import com.eventmanager.model.participant.*;
+import com.eventmanager.io.CertificateGenerator;
 import com.eventmanager.model.event.Event;
+import com.eventmanager.model.participant.External;
+import com.eventmanager.model.participant.Participant;
+import com.eventmanager.model.participant.Student;
+import com.eventmanager.model.participant.Teacher;
 import com.eventmanager.service.EventController;
 import com.eventmanager.service.ParticipantController;
 import com.eventmanager.util.InputValidator;
@@ -69,7 +73,7 @@ public class ParticipantsSubmenu {
                 }
                 case 7 -> {
                     MenuUtils.clearScreen();
-                    System.out.println("[Simulação] Certificado do participante foi gerado.");
+                    generateCertificate();
                     MenuUtils.pause();
                 }
                 case 0 -> {
@@ -230,4 +234,34 @@ public class ParticipantsSubmenu {
             list.forEach(p -> System.out.println("- " + p.getName() + " | " + p.getCpf() + "\n"));
     }
 
+    
+    private static void generateCertificate() {
+        System.out.print("Enter participant CPF: ");
+        String cpf = scanner.nextLine();
+
+        Participant participant = participantController.searchByCpf(cpf);
+        if (participant == null) {
+            System.out.println("Participant not found.");
+            MenuUtils.pause();
+            return;
+        }
+
+        System.out.print("Enter event title: ");
+        String title = scanner.nextLine();
+        Event event = eventController.searchByTitle(title);
+        if (event == null) {
+            System.out.println("Event not found.");
+            MenuUtils.pause();
+            return;
+        }
+
+        if (!participant.getRegisteredEvents().contains(event)) {
+            System.out.println("Participant not enrolled in this event.");
+            MenuUtils.pause();
+            return;
+        }
+
+        String certificate = CertificateGenerator.generateCertificate(participant, event);
+        System.out.println(certificate);
+    }
 }
