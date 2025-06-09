@@ -24,6 +24,10 @@ public abstract class Event {
 
     public abstract void registerParticipant(Participant p);
 
+    public void setDate(String date) { this.date = date; }
+    public void setLocation(String location) { this.location = location; }
+    public void setCapacity(int capacity) { this.capacity = capacity; }
+    
     public String getTitle() { return title; }
     public String getDate() { return date; }
     public String getLocation() { return location; }

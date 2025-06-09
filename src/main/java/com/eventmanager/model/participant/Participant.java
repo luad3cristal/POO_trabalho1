@@ -1,8 +1,9 @@
 package com.eventmanager.model.participant;
 
-import com.eventmanager.model.event.Event;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.eventmanager.model.event.Event;
 
 public abstract class Participant {
     protected String cpf;
@@ -22,6 +23,9 @@ public abstract class Participant {
     public void enroll(Event event) {
         registeredEvents.add(event);
     }
+
+    public void setName(String name) { this.name = name; }
+    public void setEmail(String email) { this.email = email; }
 
     public String getCpf() { return cpf; }
     public String getName() { return name; }
