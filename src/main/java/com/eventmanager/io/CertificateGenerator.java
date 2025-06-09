@@ -1,14 +1,13 @@
 package com.eventmanager.io;
 
-import java.util.UUID;
-
 import com.eventmanager.model.event.Event;
 import com.eventmanager.model.participant.Participant;
+import com.eventmanager.util.IdGenerator;
 
 public class CertificateGenerator {
 
     public static String generateCertificate(Participant participant, Event event) {
-        String certificateId = UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        String certificateId = IdGenerator.generateCertificateId();
 
         return """
                 ----------------------------------------

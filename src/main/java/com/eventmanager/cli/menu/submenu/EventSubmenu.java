@@ -1,11 +1,15 @@
 package com.eventmanager.cli.menu.submenu;
 
-import com.eventmanager.service.EventController;
-import com.eventmanager.model.event.*;
-import com.eventmanager.util.InputValidator;
-import com.eventmanager.util.MenuUtils;
-
 import java.util.Scanner;
+
+import com.eventmanager.model.event.Course;
+import com.eventmanager.model.event.Event;
+import com.eventmanager.model.event.Fair;
+import com.eventmanager.model.event.Lecture;
+import com.eventmanager.model.event.Workshop;
+import com.eventmanager.service.EventController;
+import com.eventmanager.util.DateUtils;
+import com.eventmanager.util.MenuUtils;
 
 public class EventSubmenu {
 
@@ -54,7 +58,7 @@ public class EventSubmenu {
         do {
             System.out.print("Date (dd/MM/yyyy): ");
             date = scanner.nextLine();
-        } while (!InputValidator.isValidDate(date));
+        } while (!DateUtils.isValidDate(date));
 
         System.out.print("Capacity: ");
         int capacity = scanner.nextInt();
