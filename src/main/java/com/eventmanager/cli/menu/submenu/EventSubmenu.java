@@ -15,7 +15,8 @@ import com.eventmanager.util.MenuUtils;
 public class EventSubmenu {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final EventController controller = new EventController();
+    private static final EventController controller = EventController.getInstance();
+
 
     public static void exibirMenu() {
         int opcao;

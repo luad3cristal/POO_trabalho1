@@ -17,7 +17,8 @@ public class ParticipantsSubmenu {
 
     private static final Scanner scanner = new Scanner(System.in);
     private static final ParticipantController participantController = new ParticipantController();
-    private static final EventController eventController = new EventController();
+    private static final EventController eventController = EventController.getInstance();
+
 
 
     public static void exibirMenu() {

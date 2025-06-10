@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.eventmanager.io.ReportGenerator;
-import com.eventmanager.service.EventController;
 import com.eventmanager.model.event.Event;
+import com.eventmanager.service.EventController;
 import com.eventmanager.util.DateUtils;
 import com.eventmanager.util.MenuUtils;
 
 public class ReportSubmenu {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final EventController eventController = new EventController();
+    private static final EventController eventController = EventController.getInstance();
+
 
     public static void exibirMenu() {
         int opcao;
