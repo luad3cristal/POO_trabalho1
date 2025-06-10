@@ -261,7 +261,9 @@ public class ParticipantsSubmenu {
             return;
         }
 
-        String certificate = CertificateGenerator.generateCertificate(participant, event);
-        System.out.println(certificate);
+        String fileName = "certificates/Certificate_" + participant.getCpf() + ".pdf";
+CertificateGenerator.generateCertificatePDF(participant, event, fileName);
+System.out.println("Certificate generated at: " + fileName);
+
     }
 }
