@@ -9,6 +9,7 @@ import com.eventmanager.model.event.Lecture;
 import com.eventmanager.model.event.Workshop;
 import com.eventmanager.service.EventController;
 import com.eventmanager.util.DateUtils;
+import com.eventmanager.util.InputValidator;
 import com.eventmanager.util.MenuUtils;
 
 public class EventSubmenu {
@@ -26,8 +27,14 @@ public class EventSubmenu {
             System.out.println("2. List all Events");
             System.out.println("3. Update Event");
             System.out.println("4. Delete Event");
-            System.out.println("0. Back\n");
+            System.out.println("0. Go back to Main Menu\n");
             System.out.print("Select an option: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid option. Please enter a number.");
+                scanner.next();
+                System.out.print("Select an option: ");
+            }
 
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -56,25 +63,67 @@ public class EventSubmenu {
 
         String date;
         do {
-            System.out.print("Date (dd/MM/yyyy): ");
+            System.out.print("Date (dd/MM/yyyy or dd.MM.yyyy): ");
             date = scanner.nextLine();
+            if (!DateUtils.isValidDate(date)) {
+                System.out.println("Invalid date format. Try again.");
+            }
         } while (!DateUtils.isValidDate(date));
 
-        System.out.print("Capacity: ");
-        int capacity = scanner.nextInt();
-        scanner.nextLine();
+        String inputCapacity;
+        int capacity = -1;
+        do {
+            System.out.print("Capacity (must be > 0): ");
+            inputCapacity = scanner.nextLine();
+            if (!InputValidator.isPositiveInt(inputCapacity)) {
+                System.out.println("Invalid capacity. Enter a positive number.");
+            } else {
+                capacity = Integer.parseInt(inputCapacity);
+            }
+        } while (capacity <= 0);
 
-        System.out.print("Location (physical, if applicable): ");
-        String location = scanner.nextLine();
+        String location;
+        do {
+            System.out.print("Location (can be '-' if not applicable): ");
+            location = scanner.nextLine();
+            if (location.isBlank()) {
+                System.out.println("Location cannot be empty. Use '-' if not applicable.");
+            }
+        } while (location.isBlank());
 
-        System.out.print("Is online? (true/false): ");
-        boolean isOnline = scanner.nextBoolean();
-        System.out.print("Is in-person? (true/false): ");
-        boolean isInPerson = scanner.nextBoolean();
-        scanner.nextLine();
+        Boolean isOnline = null;
+        while (isOnline == null) {
+            System.out.print("Is the event online? (true/false): ");
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false")) {
+                isOnline = Boolean.valueOf(input);
+            } else {
+                System.out.println("Please enter 'true' or 'false'.");
+            }
+        }
 
-        System.out.println("Event type (1-Lecture, 2-Workshop, 3-Course, 4-Fair): ");
-        int type = scanner.nextInt();
+        Boolean isInPerson = null;
+        while (isInPerson == null) {
+            System.out.print("Is the event in-person? (true/false): ");
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("true") || input.equalsIgnoreCase("false")) {
+                isInPerson = Boolean.valueOf(input);
+            } else {
+                System.out.println("Please enter 'true' or 'false'.");
+            }
+        }
+
+        int type = -1;
+        while (type < 1 || type > 4) {
+            System.out.println("Event type (1-Lecture, 2-Workshop, 3-Course, 4-Fair): ");
+            if (scanner.hasNextInt()) {
+                type = scanner.nextInt();
+                if (type < 1 || type > 4) System.out.println("Invalid type. Choose 1-4.");
+            } else {
+                System.out.println("Invalid input. Enter a number from 1 to 4.");
+                scanner.next();
+            }
+        }
         scanner.nextLine();
 
         Event event = switch (type) {
@@ -89,7 +138,7 @@ public class EventSubmenu {
             controller.addEvent(event);
             System.out.println("Event created successfully.");
         } else {
-            System.out.println("Invalid type.");
+            System.out.println("Failed to create event. Please try again.");
         }
 
         MenuUtils.pause();
@@ -113,17 +162,36 @@ public class EventSubmenu {
         System.out.print("Enter title of event to update: ");
         String title = scanner.nextLine();
 
-        System.out.print("New date (dd/MM/yyyy): ");
+        System.out.print("New date (dd/MM/yyyy or ENTER to keep current): ");
         String newDate = scanner.nextLine();
+        if (!newDate.isBlank() && !DateUtils.isValidDate(newDate)) {
+            System.out.println("Invalid date. Update aborted.");
+            MenuUtils.pause();
+            return;
+        }
 
-        System.out.print("New location: ");
+        System.out.print("New location (or ENTER to keep current): ");
         String newLocation = scanner.nextLine();
 
-        System.out.print("New capacity: ");
-        int capacity = scanner.nextInt();
-        scanner.nextLine();
+        String inputCapacity;
+        int capacity = -1;
+        do {
+            System.out.print("New capacity (or ENTER to keep current): ");
+            inputCapacity = scanner.nextLine();
+            if (inputCapacity.isBlank()) break;
+            if (!InputValidator.isPositiveInt(inputCapacity)) {
+                System.out.println("Invalid capacity.");
+            } else {
+                capacity = Integer.parseInt(inputCapacity);
+                break;
+            }
+        } while (true);
 
-        boolean updated = controller.updateEvent(title, newDate, newLocation, capacity);
+        boolean updated = controller.updateEvent(title,
+            newDate.isBlank() ? null : newDate,
+            newLocation.isBlank() ? null : newLocation,
+            capacity);
+
         System.out.println(updated ? "Updated successfully." : "Event not found.");
         MenuUtils.pause();
     }
@@ -133,8 +201,12 @@ public class EventSubmenu {
         System.out.print("Enter title of event to delete: ");
         String title = scanner.nextLine();
 
-        boolean deleted = controller.removeByTitle(title);
-        System.out.println(deleted ? "Event removed." : "Event not found.");
+        if (title.isBlank()) {
+            System.out.println("Title cannot be empty.");
+        } else {
+            boolean deleted = controller.removeByTitle(title);
+            System.out.println(deleted ? "Event removed." : "Event not found.");
+        }
         MenuUtils.pause();
     }
 }
