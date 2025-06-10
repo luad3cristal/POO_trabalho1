@@ -17,10 +17,9 @@ public class ReportGenerator {
 
         sb.append("=== Report by Type ===\n");
         for (String type : grouped.keySet()) {
-            sb.append("\n").append(type).append(":\n");
             for (Event e : grouped.get(type)) {
                 sb.append("- ").append(e.getTitle())
-                  .append(" (").append(e.getDate()).append(")\n");
+                  .append(" | Date: ").append(e.getDate()).append("\n");
             }
         }
 
@@ -36,7 +35,7 @@ public class ReportGenerator {
         for (Event e : sorted) {
             sb.append("- ").append(e.getDate())
               .append(": ").append(e.getTitle())
-              .append(" (").append(e.getClass().getSimpleName()).append(")\n");
+              .append(" - ").append(e.getClass().getSimpleName()).append("\n");
         }
 
         return sb.toString();

@@ -35,12 +35,10 @@ public class ReportSubmenu {
                 case 1 -> {
                     MenuUtils.clearScreen();
                     reportByType();
-                    MenuUtils.pause();
                 }
                 case 2 -> {
                     MenuUtils.clearScreen();
                     reportByDate();
-                    MenuUtils.pause();
                 }
                 case 0 -> {
                     MenuUtils.clearScreen();
@@ -77,7 +75,6 @@ public class ReportSubmenu {
 
         if (typeName == null) {
             System.out.println("Invalid option.");
-            MenuUtils.pause();
             return;
         }
 
@@ -86,8 +83,9 @@ public class ReportSubmenu {
                 .toList();
 
         if (filtered.isEmpty()) {
-            System.out.println("No events of type " + typeName + " found.");
+            System.out.println("\nNo events of type " + typeName + " found.");
         } else {
+            MenuUtils.clearScreen();
             String report = ReportGenerator.generateReportByType(filtered);
             System.out.println(report);
         }
@@ -122,8 +120,9 @@ public class ReportSubmenu {
                 .toList();
 
         if (filtered.isEmpty()) {
-            System.out.println("No events found on " + DateUtils.formatDate(finalDate) + ".");
+            System.out.println("\nNo events found on " + DateUtils.formatDate(finalDate) + ".");
         } else {
+            MenuUtils.clearScreen();
             String report = ReportGenerator.generateReportByDate(filtered);
             System.out.println(report);
         }
