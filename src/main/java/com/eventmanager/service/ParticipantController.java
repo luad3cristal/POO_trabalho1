@@ -8,8 +8,15 @@ import com.eventmanager.model.participant.Participant;
 
 
 public class ParticipantController {
+  private static final ParticipantController instance = new ParticipantController();
   private final List<Participant> participants = new ArrayList<>();
   
+  private ParticipantController() {}
+
+  public static ParticipantController getInstance() {
+      return instance;
+  }
+
   public void addParticipant (Participant p) {
     participants.add(p);
   }

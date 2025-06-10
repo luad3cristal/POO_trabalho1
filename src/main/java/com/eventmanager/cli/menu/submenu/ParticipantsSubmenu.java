@@ -16,7 +16,7 @@ import com.eventmanager.util.MenuUtils;
 public class ParticipantsSubmenu {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final ParticipantController participantController = new ParticipantController();
+    private static final ParticipantController participantController = ParticipantController.getInstance();
     private static final EventController eventController = EventController.getInstance();
 
 

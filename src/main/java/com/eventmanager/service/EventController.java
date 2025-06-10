@@ -10,12 +10,12 @@ import com.eventmanager.model.event.HybridEvent;
 public class EventController {
   private static final EventController instance = new EventController();
   private final List<Event> events = new ArrayList<>();
-  
-    private EventController() {}
 
-    public static EventController getInstance() {
-        return instance;
-    }
+  private EventController() {}
+
+  public static EventController getInstance() {
+      return instance;
+  }
 
   public void addEvent (Event event) {
     events.add(event);
