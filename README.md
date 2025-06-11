@@ -100,7 +100,7 @@ Ensure that your `pom.xml` has the followed plugin configurations:
 **Institution:** IFBA
 
 
-<br>
+---
+### Notes:
 
-### Notes
 Using openjdk version "24.0.1" 2025-04-15
