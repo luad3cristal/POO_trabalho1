@@ -194,6 +194,14 @@ public class EventSubmenu {
         System.out.print("New location (or ENTER to keep current): ");
         String newLocation = scanner.nextLine();
 
+        System.out.print("New online link (or ENTER to keep current): ");
+        String newLink = scanner.nextLine();
+        if (!newLink.isBlank() && !InputValidator.isValidURL(newLink)) {
+            System.out.println("Invalid link. Update aborted.");
+            MenuUtils.pause();
+            return;
+        }
+
         String inputCapacity;
         int capacity = -1;
         do {
@@ -208,10 +216,13 @@ public class EventSubmenu {
             }
         } while (true);
 
-        boolean updated = eventController.updateEvent(title,
+        boolean updated = eventController.updateEvent(
+            title,
             newDate.isBlank() ? null : newDate,
             newLocation.isBlank() ? null : newLocation,
-            capacity);
+            capacity,
+            newLink.isBlank() ? null : newLink
+        );
 
         System.out.println(updated ? "Updated successfully." : "Event not found.");
         MenuUtils.pause();

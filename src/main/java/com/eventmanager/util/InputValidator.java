@@ -1,7 +1,6 @@
 package com.eventmanager.util;
 
 public class InputValidator {
-
     public static boolean isValidEmail(String email) {
         if (email == null || email.isBlank()) return false;
 
