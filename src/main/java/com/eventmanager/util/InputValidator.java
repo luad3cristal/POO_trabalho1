@@ -56,6 +56,14 @@ public class InputValidator {
         return url.startsWith("http://") || url.startsWith("https://");
     }
 
+    public static boolean isValidRegistrationNumber(String input) {
+        if (input == null || input.length() > 11) return false;
+        for (char c : input.toCharArray()) {
+            if (!Character.isDigit(c)) return false;
+        }
+        return true;
+    }
+
     public static boolean isPositiveInt(String input) {
         try {
             return Integer.parseInt(input) > 0;

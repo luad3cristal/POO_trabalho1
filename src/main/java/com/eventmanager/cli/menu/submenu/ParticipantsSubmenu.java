@@ -35,6 +35,12 @@ public class ParticipantsSubmenu {
             System.out.println("0. Go back to Main Menu\n");
             System.out.print("Select an option: ");
 
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid option. Please enter a number.");
+                scanner.next();
+                System.out.print("Select an option: ");
+            }
+
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -74,9 +80,7 @@ public class ParticipantsSubmenu {
                     generateCertificate();
                     MenuUtils.pause();
                 }
-                case 0 -> {
-                    MenuUtils.clearScreen();
-                }
+                case 0 -> MenuUtils.clearScreen();
                 default -> {
                     MenuUtils.clearScreen();
                     System.out.println("Invalid option. Try again.");
@@ -90,22 +94,31 @@ public class ParticipantsSubmenu {
     private static void addParticipant() {
         System.out.println("--- ADD PARTICIPANT ---");
 
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         String name = scanner.nextLine();
 
         String email;
         do { 
-            System.out.println("Email: ");
+            System.out.print("Email: ");
             email = scanner.nextLine();
+            if (!InputValidator.isValidEmail(email)) {
+                System.out.println("Invalid email. Try again.");
+            }
         } while (!InputValidator.isValidEmail(email));
-        // precisa comunicar o erro
-    
+
         String cpf;
         do {
-            System.out.println("CPF (format xxx.xxx.xxx-xx): ");
+            System.out.print("CPF (format xxx.xxx.xxx-xx): ");
             cpf = scanner.nextLine();
-        } while (InputValidator.isValidCPF(cpf));
-        // validator errado
+            if (!InputValidator.isValidCPF(cpf)) {
+                System.out.println("Invalid CPF. Try again.");
+            }
+        } while (!InputValidator.isValidCPF(cpf));
+
+        if (participantController.searchByCpf(cpf) != null) {
+            System.out.println("Participant with this CPF already exists.");
+            return;
+        }
 
         int participantType;
         Participant participant = null;
@@ -116,123 +129,154 @@ public class ParticipantsSubmenu {
             System.out.println("3. External Person\n");
             System.out.print("Select an option: ");
 
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                System.out.print("Select an option: ");
+            }
+
             participantType = scanner.nextInt();
             scanner.nextLine();
 
-        
             switch (participantType) {
                 case 1 -> {
-                    System.out.println("Registration Number: ");
-                    int registrationNumber = scanner.nextInt();
-                    scanner.nextLine();
-                    // string ou int?
-                    
-                    System.out.println("Course: ");
+                    String registrationNumber;
+                    do {
+                        System.out.print("Registration Number (max 11 digits): ");
+                        registrationNumber = scanner.nextLine();
+                        if (!InputValidator.isValidRegistrationNumber(registrationNumber)) {
+                            System.out.println("Invalid registration number.");
+                        }
+                    } while (!InputValidator.isValidRegistrationNumber(registrationNumber));
+
+                    System.out.print("Course: ");
                     String course = scanner.nextLine();
-    
-                    System.out.println("Institution: ");
+
+                    System.out.print("Institution: ");
                     String institution = scanner.nextLine();
-    
+
                     participant = new Student(name, email, cpf, registrationNumber, course, institution);
                 }
                 case 2 -> {
-                    System.out.println("Department Name: ");
+                    System.out.print("Department Name: ");
                     String department = scanner.nextLine();
-    
-                    System.out.println("Institution: ");
+
+                    System.out.print("Institution: ");
                     String institution = scanner.nextLine();
-    
+
                     participant = new Teacher(name, email, cpf, department, institution);
                 }
                 case 3 -> {
-                    System.out.println("Profession: ");
+                    System.out.print("Profession: ");
                     String profession = scanner.nextLine();
-    
-                    System.out.println("Work Place: ");
+
+                    System.out.print("Work Place: ");
                     String workPlace = scanner.nextLine();
-    
+
                     participant = new External(name, email, cpf, profession, workPlace);
                 }
-                    
                 default -> System.out.println("Invalid type. Try again.");
             }
 
-        } while (participantType > 3 || participantType < 1);
+        } while (participantType < 1 || participantType > 3);
 
         if (participant != null) {
             participantController.addParticipant(participant);
-            System.out.println("Participant sucessfully subscribed.");
+            System.out.println("Participant successfully subscribed.");
         }
-    
     }
 
     private static void searchParticipant() {
-        System.out.println("Enter CPF: ");
+        System.out.print("Enter CPF: ");
         String cpf = scanner.nextLine();
 
         Participant participant = participantController.searchByCpf(cpf);
         
-        if (participant != null) 
-            System.out.println("Name: " + participant.getName() + " Email: " + participant.getEmail());
-        else 
-            System.out.println("Participant not found");
-
+        if (participant != null)
+            System.out.println("Name: " + participant.getName() + " | Email: " + participant.getEmail());
+        else
+            System.out.println("Participant not found.");
     }
 
     private static void updateParticipant() {
-        System.out.println("Enter CPF of participant: ");
+        System.out.print("Enter CPF of participant: ");
         String cpf = scanner.nextLine();
-        // validar esse cpf inserido
-        
-        System.out.println("Enter new name of participant: ");
+
+        if (!InputValidator.isValidCPF(cpf)) {
+            System.out.println("Invalid CPF.");
+            return;
+        }
+
+        Participant participant = participantController.searchByCpf(cpf);
+        if (participant == null) {
+            System.out.println("Participant not found.");
+            return;
+        }
+
+        System.out.print("Enter new name of participant: ");
         String name = scanner.nextLine();
-        
 
         String email;
-        do {             
-            System.out.println("Enter new email of participant: ");
+        do {
+            System.out.print("Enter new email of participant: ");
             email = scanner.nextLine();
+            if (!InputValidator.isValidEmail(email)) {
+                System.out.println("Invalid email. Try again.");
+            }
         } while (!InputValidator.isValidEmail(email));
 
         boolean updated = participantController.updateParticipant(cpf, name, email);
-        System.out.println(updated ? "Updated sucessfully" : "Participant not found");
+        System.out.println(updated ? "Updated successfully." : "A problem occurred. Please try again.");
     }
 
     private static void removeParticipant() {
-        System.out.println("Enter CPF of participant: ");
+        System.out.print("Enter CPF of participant: ");
         String cpf = scanner.nextLine();
+
+        Participant participant = participantController.searchByCpf(cpf);
+        if (participant == null) {
+            System.out.println("Participant not found.");
+            return;
+        }
         
         boolean removed = participantController.removeByCpf(cpf);
-        System.out.println(removed ? "Participant data removed sucessfully" : "Participant not found");
+        System.out.println(removed ? "Participant data removed successfully." : "A problem occurred. Please try again.");
     }
 
     private static void enrollParticipant() {
-        // checar se tem algum evento
+        if (eventController.listAllEvents().isEmpty()) {
+            System.out.println("No events available to enroll in.");
+            return;
+        }
 
-
-        System.out.println("Enter CPF of participant: ");
+        System.out.print("Enter CPF of participant: ");
         String cpf = scanner.nextLine();
         
-        System.out.println("Enter title of event: ");
+        Participant participant = participantController.searchByCpf(cpf);
+        if (participant == null) {
+            System.out.println("Participant not found.");
+            return;
+        }
+        
+        System.out.print("Enter title of event: ");
         String title = scanner.nextLine();
         
         Event event = eventController.searchByTitle(title);
-        if (event != null) 
+        if (event != null)
             participantController.subscribeInEvent(cpf, event);
-        else 
-            System.out.println("Event not found.");     
+        else
+            System.out.println("Event not found.");
     }
 
     private static void listAllParticipants() {
         var list = participantController.listAllParticipants();
 
         if (list.isEmpty())
-            System.out.println("Event not found.");
-        else   
-            list.forEach(p -> System.out.println("- " + p.getName() + " | " + p.getCpf() + "\n"));
+            System.out.println("No participants found.");
+        else
+            list.forEach(p -> System.out.println("- " + p.getName() + " | " + p.getCpf()));
     }
 
-    
     private static void generateCertificate() {
         System.out.print("Enter participant CPF: ");
         String cpf = scanner.nextLine();
@@ -240,7 +284,6 @@ public class ParticipantsSubmenu {
         Participant participant = participantController.searchByCpf(cpf);
         if (participant == null) {
             System.out.println("Participant not found.");
-            MenuUtils.pause();
             return;
         }
 
@@ -249,19 +292,16 @@ public class ParticipantsSubmenu {
         Event event = eventController.searchByTitle(title);
         if (event == null) {
             System.out.println("Event not found.");
-            MenuUtils.pause();
             return;
         }
 
         if (!participant.getRegisteredEvents().contains(event)) {
             System.out.println("Participant not enrolled in this event.");
-            MenuUtils.pause();
             return;
         }
 
         String fileName = "certificates/Certificate_" + participant.getCpf() + ".pdf";
-CertificateGenerator.generateCertificatePDF(participant, event, fileName);
-System.out.println("Certificate generated at: " + fileName);
-
+        CertificateGenerator.generateCertificatePDF(participant, event, fileName);
+        System.out.println("Certificate generated at: " + fileName);
     }
 }
