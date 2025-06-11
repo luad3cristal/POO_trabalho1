@@ -11,12 +11,19 @@ import com.eventmanager.model.event.Event;
 public class DateUtils {
     private static final DateTimeFormatter[] SUPPORTED_FORMATS = {
         DateTimeFormatter.ofPattern("dd/MM/yyyy"),
-        DateTimeFormatter.ofPattern("dd.MM.yyyy")
-    };
+        DateTimeFormatter.ofPattern("d/M/yyyy"),
+        DateTimeFormatter.ofPattern("dd-MM-yyyy"),
+        DateTimeFormatter.ofPattern("d-M-yyyy"),
+        DateTimeFormatter.ofPattern("dd.MM.yyyy"),
+        DateTimeFormatter.ofPattern("d.M.yyyy"),
 
-    public static boolean isValidDate(String dateStr) {
-        return parseDateFlexible(dateStr) != null;
-    }
+        DateTimeFormatter.ofPattern("dd/MM/yy"),
+        DateTimeFormatter.ofPattern("d/M/yy"),
+        DateTimeFormatter.ofPattern("dd-MM-yy"),
+        DateTimeFormatter.ofPattern("d-M-yy"),
+        DateTimeFormatter.ofPattern("dd.MM.yy"),
+        DateTimeFormatter.ofPattern("d.M.yy"),
+    };
 
     public static LocalDate parseDateFlexible(String dateStr) {
         if (dateStr == null || dateStr.isBlank()) return null;
@@ -28,6 +35,10 @@ public class DateUtils {
         }
 
         return null;
+    }
+
+    public static boolean isValidDate(String dateStr) {
+        return parseDateFlexible(dateStr) != null;
     }
 
     public static long daysBeforeToday(String dateStr) {
