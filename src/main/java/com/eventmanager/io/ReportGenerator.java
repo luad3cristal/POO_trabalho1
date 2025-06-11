@@ -35,7 +35,7 @@ public class ReportGenerator {
         sb.append("=== Report by Date ===\n");
         for (Event e : sorted) {
             sb.append("- ").append(e.getTitle())
-              .append(" | Date: ").append(e.getDate()).append("\n");
+              .append(" | Date: ").append(DateUtils.formatDate(DateUtils.parseDateFlexible(e.getDate()))).append("\n");
         }
 
         return sb.toString();
