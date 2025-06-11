@@ -1,12 +1,18 @@
 package com.eventmanager.model.event;
 
+import java.time.LocalDate;
+
 import  com.eventmanager.model.participant.Participant;
 import  com.eventmanager.model.participant.Student;
+import com.eventmanager.util.DateUtils;
 
 public class Course extends Event implements HybridEvent {
     private boolean online;
     private boolean inPerson;
     private String onlineLink;
+
+    LocalDate localDate = DateUtils.parseDateFlexible(getDate());
+    String formattedDate = DateUtils.formatDate(localDate);
 
     public Course (String title, String date, String location, String onlineLink, int capacity, String description, boolean online, boolean inPerson) {
         super(title, date, "-", capacity, "Course");
@@ -34,7 +40,7 @@ public class Course extends Event implements HybridEvent {
     public String getEventDescription() {
         return "- " + getDescription() + ": "   
             + getTitle()
-            + " | " + getDate()
+            + " | " + formattedDate
             + " | Capacity: " + getCapacity()
             + (isOnline() ? " | Online Link: " + (getOnlineLink().equals("-") ? "Not defined yet" : getOnlineLink()) : "") 
             + (isInPerson() ? " | Location: " + (getLocation().equals("-") ? "Not defined yet" : getLocation()) : "");

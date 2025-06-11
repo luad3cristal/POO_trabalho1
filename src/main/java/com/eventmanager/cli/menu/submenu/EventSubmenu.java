@@ -66,7 +66,7 @@ public class EventSubmenu {
 
         String date;
         do {
-            System.out.print("Date (dd/MM/yyyy or dd.MM.yyyy): ");
+            System.out.print("Date: ");
             date = scanner.nextLine();
             if (!DateUtils.isValidDate(date)) {
                 System.out.println("Invalid date format. Try again.");
@@ -183,7 +183,7 @@ public class EventSubmenu {
             title = scanner.nextLine();
         } while (title.isBlank());
 
-        System.out.print("New date (dd/MM/yyyy or ENTER to keep current): ");
+        System.out.print("New date (or ENTER to keep current): ");
         String newDate = scanner.nextLine();
         if (!newDate.isBlank() && !DateUtils.isValidDate(newDate)) {
             System.out.println("Invalid date. Update aborted.");

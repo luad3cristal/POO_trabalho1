@@ -33,6 +33,6 @@ public abstract class Event {
     public String getDate() { return date; }
     public String getLocation() { return location; }
     public int getCapacity() { return capacity; }
-    public String getDescription() { return description; }
+    public String getDescription() { return description;}
     public List<Participant> getParticipants() { return participants; }
 }

@@ -3,6 +3,7 @@ package com.eventmanager.io;
 import com.eventmanager.model.event.Event;
 import com.eventmanager.model.event.HybridEvent;
 import com.eventmanager.model.participant.Participant;
+import com.eventmanager.util.DateUtils;
 import com.eventmanager.util.IdGenerator;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -14,17 +15,19 @@ import java.io.File;
 import java.io.IOException;
 
 public class CertificateGenerator {
-
+    
     public static String generateCertificateText(Participant participant, Event event, String certificateId) {
+        String formattedDate = DateUtils.formatDate(DateUtils.parseDateFlexible(event.getDate()));
+
         return String.format("""
                 CERTIFICATE OF PARTICIPATION
-                
+
                 Certificate ID: %s
 
                 This is to certify that
                 %s (CPF: %s)
                 participated in the event:
-                \"%s\" on %s.
+                "%s" on %s.
 
                 Mode: %s
                 """,
@@ -32,10 +35,10 @@ public class CertificateGenerator {
                 participant.getName(),
                 participant.getCpf(),
                 event.getTitle(),
-                event.getDate(),
+                formattedDate != null ? formattedDate : "Invalid Date",
                 event instanceof HybridEvent hybrid
                         ? (hybrid.isOnline() && hybrid.isInPerson() ? "Hybrid" :
-                          hybrid.isOnline() ? "Online" : "In-person")
+                        hybrid.isOnline() ? "Online" : "In-person")
                         : "In-person"
         );
     }

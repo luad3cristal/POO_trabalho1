@@ -11,20 +11,21 @@ import com.eventmanager.util.DateUtils;
 public class ReportGenerator {
 
     public static String generateReportByType(List<Event> events) {
-        StringBuilder sb = new StringBuilder();
-        Map<String, List<Event>> grouped = events.stream()
-                .collect(Collectors.groupingBy(e -> e.getClass().getSimpleName()));
+    StringBuilder sb = new StringBuilder();
+    Map<String, List<Event>> grouped = events.stream()
+            .collect(Collectors.groupingBy(e -> e.getClass().getSimpleName()));
 
-        sb.append("=== Report by Type ===\n");
-        for (String type : grouped.keySet()) {
-            for (Event e : grouped.get(type)) {
-                sb.append("- ").append(e.getTitle())
-                  .append(" | Date: ").append(e.getDate()).append("\n");
-            }
+    sb.append("=== Report by Type ===\n");
+    for (String type : grouped.keySet()) {
+        for (Event e : grouped.get(type)) {
+            sb.append("- ").append(e.getTitle())
+              .append(" | Date: ").append(DateUtils.formatDate(DateUtils.parseDateFlexible(e.getDate()))).append("\n");
         }
-
-        return sb.toString();
     }
+
+    return sb.toString();
+}
+
 
     public static String generateReportByDate(List<Event> events) {
         StringBuilder sb = new StringBuilder();
@@ -33,9 +34,8 @@ public class ReportGenerator {
 
         sb.append("=== Report by Date ===\n");
         for (Event e : sorted) {
-            sb.append("- ").append(e.getDate())
-              .append(": ").append(e.getTitle())
-              .append(" - ").append(e.getClass().getSimpleName()).append("\n");
+            sb.append("- ").append(e.getTitle())
+              .append(" | Date: ").append(e.getDate()).append("\n");
         }
 
         return sb.toString();

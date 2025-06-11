@@ -44,9 +44,7 @@ public class ReportSubmenu {
                     MenuUtils.clearScreen();
                     reportByDate();
                 }
-                case 0 -> {
-                    MenuUtils.clearScreen();
-                }
+                case 0 -> MenuUtils.clearScreen();
                 default -> {
                     MenuUtils.clearScreen();
                     System.out.println("Invalid option. Try again.");
@@ -117,7 +115,7 @@ public class ReportSubmenu {
         LocalDate targetDate = null;
 
         do {
-            System.out.print("Enter the event date (dd/MM/yyyy or dd.MM.yyyy): ");
+            System.out.print("Enter the event date: ");
             inputDate = scanner.nextLine();
             targetDate = DateUtils.parseDateFlexible(inputDate);
             if (targetDate == null) {
@@ -128,11 +126,11 @@ public class ReportSubmenu {
         final LocalDate finalDate = targetDate;
 
         List<Event> filtered = events.stream()
-                .filter(e -> {
-                    LocalDate eventDate = DateUtils.parseDateFlexible(e.getDate());
-                    return eventDate != null && eventDate.equals(finalDate);
-                })
-                .toList();
+        .filter(e -> {
+            LocalDate eventDate = DateUtils.parseDateFlexible(e.getDate());
+            return eventDate != null && eventDate.equals(finalDate);
+        })
+        .toList();
 
         if (filtered.isEmpty()) {
             System.out.println("\nNo events found on " + DateUtils.formatDate(finalDate) + ".");
