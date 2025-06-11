@@ -23,6 +23,7 @@ public abstract class Event {
     }
 
     public abstract void registerParticipant(Participant p);
+    public abstract String getEventDescription();
 
     public void setDate(String date) { this.date = date; }
     public void setLocation(String location) { this.location = location; }

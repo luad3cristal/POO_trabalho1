@@ -79,7 +79,7 @@ public class ReportSubmenu {
                 scanner.next();
             }
         }
-        scanner.nextLine(); // consume newline
+        scanner.nextLine();
 
         String typeName = switch (type) {
             case 1 -> "Lecture";

@@ -168,7 +168,7 @@ public class EventSubmenu {
             System.out.println("No events found.");
         } else {
             for (Event e : list) {
-                System.out.println("- " + e.getTitle() + " | " + e.getDate() + " | Capacity: " + e.getCapacity());
+                System.out.println(e.getEventDescription() + "\n");
             }
         }
         MenuUtils.pause();

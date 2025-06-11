@@ -24,6 +24,15 @@ public class Workshop extends Event implements HybridEvent {
         participants.add(p);
     }
 
+    @Override
+    public String getEventDescription() {
+        return "- " + getDescription() + ": "   
+            + getTitle()
+            + " | " + getDate()
+            + " | Capacity: " + getCapacity()
+            + (isOnline() ? " | Online Link: " + (getOnlineLink().equals("-") ? "Not defined yet" : getOnlineLink()) : "") 
+            + (isInPerson() ? " | Location: " + (getLocation().equals("-") ? "Not defined yet" : getLocation()) : "");
+    }
 
 
     @Override
