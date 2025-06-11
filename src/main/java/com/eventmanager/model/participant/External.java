@@ -14,7 +14,11 @@ public class External extends Participant {
   public String getIdentifier() {
     return cpf;
   }
-
+ 
+  @Override
+  public String getDescription() {
+    return "- External Person: " + getName() + " | " + getIdentifier() + "\n" + getProfession() + " - " + getWorkPlace();
+  }
 
   public void setProfession (String profession) {this.profession = profession;}
   public void setWorkPlace (String workPlace) {this.workPlace = workPlace;}

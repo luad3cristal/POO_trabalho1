@@ -315,8 +315,10 @@ public class ParticipantsSubmenu {
 
         if (list.isEmpty())
             System.out.println("No participants found.");
-        else
-            list.forEach(p -> System.out.println("- " + p.getName() + " | " + p.getCpf()));
+        else {
+            
+            list.forEach(p -> System.out.println(p.getDescription() + "\n"));
+        }
     }
 
     private static void generateCertificate() {

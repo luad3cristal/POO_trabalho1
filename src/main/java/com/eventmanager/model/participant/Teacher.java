@@ -15,6 +15,12 @@ public class Teacher extends Participant {
     return cpf;
   }
 
+   
+  @Override
+  public String getDescription() {
+    return "- Student: " + getName() + " | " + getIdentifier() + "\n" + getDepartment() + " - " + getInstitution();
+  }
+
   public String getDepartment () {return department;}
   public String getInstitution () {return institution;}
 }

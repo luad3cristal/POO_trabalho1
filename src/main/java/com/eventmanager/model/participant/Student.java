@@ -17,6 +17,12 @@ public class Student extends Participant {
     return cpf;
   }
 
+   
+  @Override
+  public String getDescription() {
+    return "- Student: " + getName() + " (" + getRegistrationNumber() + ")" + "\n" + getCourse() + " - " + getInstitution();
+  }
+
   public String getRegistrationNumber () {return registrationNumber;}
   public String getCourse () {return course;}
   public String getInstitution () {return institution;}

@@ -19,6 +19,7 @@ public abstract class Participant {
     }
 
     public abstract String getIdentifier(); 
+    public abstract String getDescription(); 
 
     public void enroll(Event event) {
         registeredEvents.add(event);
