@@ -17,7 +17,6 @@ public class EventSubmenu {
     private static final Scanner scanner = new Scanner(System.in);
     private static final EventController eventController = EventController.getInstance();
 
-
     public static void exibirMenu() {
         int opcao;
 
@@ -59,8 +58,11 @@ public class EventSubmenu {
         MenuUtils.clearScreen();
         System.out.println("--- CREATE EVENT ---");
 
-        System.out.print("Title: ");
-        String title = scanner.nextLine();
+        String title;
+        do {
+            System.out.print("Title: ");
+            title = scanner.nextLine();
+        } while (title.isBlank());
 
         String date;
         do {
@@ -83,7 +85,6 @@ public class EventSubmenu {
             }
         } while (capacity <= 0);
 
-
         Boolean isOnline = null;
         while (isOnline == null) {
             System.out.print("Is the event online? (true/false): ");
@@ -97,17 +98,15 @@ public class EventSubmenu {
 
         String onlineLink = "-";
         if (isOnline) {
-            while (onlineLink == null) {
+            do {
                 System.out.print("What is the link? (Use '-' if it is unknown): ");
-                String input = scanner.nextLine();
-                if (InputValidator.isValidURL(input)) {
-                    onlineLink = input;
-                } else {
+                onlineLink = scanner.nextLine();
+                if (!InputValidator.isValidURL(onlineLink)) {
                     System.out.println("Please enter a proper link. Use '-' if it is unknown.");
+                    onlineLink = null;
                 }
-            }
+            } while (onlineLink == null);
         }
-       
 
         Boolean isInPerson = null;
         while (isInPerson == null) {
@@ -177,8 +176,12 @@ public class EventSubmenu {
 
     private static void updateEvent() {
         MenuUtils.clearScreen();
-        System.out.print("Enter title of event to update: ");
-        String title = scanner.nextLine();
+
+        String title;
+        do {
+            System.out.print("Enter title of event to update: ");
+            title = scanner.nextLine();
+        } while (title.isBlank());
 
         System.out.print("New date (dd/MM/yyyy or ENTER to keep current): ");
         String newDate = scanner.nextLine();
@@ -216,15 +219,15 @@ public class EventSubmenu {
 
     private static void deleteEvent() {
         MenuUtils.clearScreen();
-        System.out.print("Enter title of event to delete: ");
-        String title = scanner.nextLine();
 
-        if (title.isBlank()) {
-            System.out.println("Title cannot be empty.");
-        } else {
-            boolean deleted = eventController.removeByTitle(title);
-            System.out.println(deleted ? "Event removed." : "Event not found.");
-        }
+        String title;
+        do {
+            System.out.print("Enter title of event to delete: ");
+            title = scanner.nextLine();
+        } while (title.isBlank());
+
+        boolean deleted = eventController.removeByTitle(title);
+        System.out.println(deleted ? "Event removed." : "Event not found.");
         MenuUtils.pause();
     }
 }

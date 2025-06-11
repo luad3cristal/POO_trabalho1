@@ -94,11 +94,17 @@ public class ParticipantsSubmenu {
     private static void addParticipant() {
         System.out.println("--- ADD PARTICIPANT ---");
 
-        System.out.print("Name: ");
-        String name = scanner.nextLine();
+        String name;
+        do {
+            System.out.print("Name: ");
+            name = scanner.nextLine();
+            if (name.isBlank()) {
+                System.out.println("Name cannot be empty.");
+            }
+        } while (name.isBlank());
 
         String email;
-        do { 
+        do {
             System.out.print("Email: ");
             email = scanner.nextLine();
             if (!InputValidator.isValidEmail(email)) {
@@ -122,7 +128,7 @@ public class ParticipantsSubmenu {
 
         int participantType;
         Participant participant = null;
-        do { 
+        do {
             System.out.println("Insert Participant Type");
             System.out.println("1. Student");
             System.out.println("2. Teacher");
@@ -149,29 +155,65 @@ public class ParticipantsSubmenu {
                         }
                     } while (!InputValidator.isValidRegistrationNumber(registrationNumber));
 
-                    System.out.print("Course: ");
-                    String course = scanner.nextLine();
+                    String course;
+                    do {
+                        System.out.print("Course: ");
+                        course = scanner.nextLine();
+                        if (course.isBlank()) {
+                            System.out.println("Course cannot be empty.");
+                        }
+                    } while (course.isBlank());
 
-                    System.out.print("Institution: ");
-                    String institution = scanner.nextLine();
+                    String institution;
+                    do {
+                        System.out.print("Institution: ");
+                        institution = scanner.nextLine();
+                        if (institution.isBlank()) {
+                            System.out.println("Institution cannot be empty.");
+                        }
+                    } while (institution.isBlank());
 
                     participant = new Student(name, email, cpf, registrationNumber, course, institution);
                 }
                 case 2 -> {
-                    System.out.print("Department Name: ");
-                    String department = scanner.nextLine();
+                    String department;
+                    do {
+                        System.out.print("Department Name: ");
+                        department = scanner.nextLine();
+                        if (department.isBlank()) {
+                            System.out.println("Department cannot be empty.");
+                        }
+                    } while (department.isBlank());
 
-                    System.out.print("Institution: ");
-                    String institution = scanner.nextLine();
+                    String institution;
+                    do {
+                        System.out.print("Institution: ");
+                        institution = scanner.nextLine();
+                        if (institution.isBlank()) {
+                            System.out.println("Institution cannot be empty.");
+                        }
+                    } while (institution.isBlank());
 
                     participant = new Teacher(name, email, cpf, department, institution);
                 }
                 case 3 -> {
-                    System.out.print("Profession: ");
-                    String profession = scanner.nextLine();
+                    String profession;
+                    do {
+                        System.out.print("Profession: ");
+                        profession = scanner.nextLine();
+                        if (profession.isBlank()) {
+                            System.out.println("Profession cannot be empty.");
+                        }
+                    } while (profession.isBlank());
 
-                    System.out.print("Work Place: ");
-                    String workPlace = scanner.nextLine();
+                    String workPlace;
+                    do {
+                        System.out.print("Work Place: ");
+                        workPlace = scanner.nextLine();
+                        if (workPlace.isBlank()) {
+                            System.out.println("Work Place cannot be empty.");
+                        }
+                    } while (workPlace.isBlank());
 
                     participant = new External(name, email, cpf, profession, workPlace);
                 }
@@ -278,6 +320,12 @@ public class ParticipantsSubmenu {
     }
 
     private static void generateCertificate() {
+        var participantAmount = participantController.listAllParticipants();
+        if (participantAmount.isEmpty()) {
+            System.out.println("There are no participants registered.");
+            return;
+        }
+        
         System.out.print("Enter participant CPF: ");
         String cpf = scanner.nextLine();
 

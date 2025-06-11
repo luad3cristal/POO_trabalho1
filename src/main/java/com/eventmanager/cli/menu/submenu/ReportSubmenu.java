@@ -11,10 +11,8 @@ import com.eventmanager.util.DateUtils;
 import com.eventmanager.util.MenuUtils;
 
 public class ReportSubmenu {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static final EventController eventController = EventController.getInstance();
-
 
     public static void exibirMenu() {
         int opcao;
@@ -27,6 +25,12 @@ public class ReportSubmenu {
             System.out.println("2. Report by Date");
             System.out.println("0. Go back to Main Menu\n");
             System.out.print("Select an option: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+                System.out.print("Select an option: ");
+            }
 
             opcao = scanner.nextInt();
             scanner.nextLine();
@@ -45,7 +49,7 @@ public class ReportSubmenu {
                 }
                 default -> {
                     MenuUtils.clearScreen();
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Invalid option. Try again.");
                     MenuUtils.pause();
                 }
             }
@@ -58,12 +62,24 @@ public class ReportSubmenu {
 
         if (events.isEmpty()) {
             System.out.println("There are no events registered.");
+            MenuUtils.pause();
             return;
         }
 
-        System.out.println("Choose an Event type: \n1-Lecture \n2-Workshop \n3-Course \n4-Fair\nYour option: ");
-        int type = scanner.nextInt();
-        scanner.nextLine();
+        int type = -1;
+        while (type < 1 || type > 4) {
+            System.out.println("Choose an Event type: \n1-Lecture \n2-Workshop \n3-Course \n4-Fair\nYour option: ");
+            if (scanner.hasNextInt()) {
+                type = scanner.nextInt();
+                if (type < 1 || type > 4) {
+                    System.out.println("Invalid option. Please choose between 1 and 4.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+        }
+        scanner.nextLine(); // consume newline
 
         String typeName = switch (type) {
             case 1 -> "Lecture";
@@ -72,11 +88,6 @@ public class ReportSubmenu {
             case 4 -> "Fair";
             default -> null;
         };
-
-        if (typeName == null) {
-            System.out.println("Invalid option.");
-            return;
-        }
 
         List<Event> filtered = events.stream()
                 .filter(e -> e.getClass().getSimpleName().equalsIgnoreCase(typeName))
@@ -98,6 +109,7 @@ public class ReportSubmenu {
 
         if (events.isEmpty()) {
             System.out.println("There are no events registered.");
+            MenuUtils.pause();
             return;
         }
 
@@ -108,9 +120,12 @@ public class ReportSubmenu {
             System.out.print("Enter the event date (dd/MM/yyyy or dd.MM.yyyy): ");
             inputDate = scanner.nextLine();
             targetDate = DateUtils.parseDateFlexible(inputDate);
+            if (targetDate == null) {
+                System.out.println("Invalid date format. Try again.");
+            }
         } while (targetDate == null);
 
-        final LocalDate finalDate = targetDate; 
+        final LocalDate finalDate = targetDate;
 
         List<Event> filtered = events.stream()
                 .filter(e -> {
