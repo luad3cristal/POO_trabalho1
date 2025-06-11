@@ -14,12 +14,9 @@ import com.eventmanager.util.InputValidator;
 import com.eventmanager.util.MenuUtils;
 
 public class ParticipantsSubmenu {
-
     private static final Scanner scanner = new Scanner(System.in);
     private static final ParticipantController participantController = ParticipantController.getInstance();
     private static final EventController eventController = EventController.getInstance();
-
-
 
     public static void exibirMenu() {
         int opcao;

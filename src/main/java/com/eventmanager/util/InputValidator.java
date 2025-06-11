@@ -51,6 +51,11 @@ public class InputValidator {
             clean.substring(9);
     }
 
+    public static boolean isValidURL(String url) {
+        if (url == null || url.isBlank()) return false;
+        return url.startsWith("http://") || url.startsWith("https://");
+    }
+
     public static boolean isPositiveInt(String input) {
         try {
             return Integer.parseInt(input) > 0;

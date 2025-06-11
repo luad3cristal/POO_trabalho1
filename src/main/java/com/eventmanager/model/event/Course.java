@@ -4,14 +4,15 @@ import  com.eventmanager.model.participant.Participant;
 import  com.eventmanager.model.participant.Student;
 
 public class Course extends Event implements HybridEvent {
-    private boolean  online;
-    private boolean  inPerson;
+    private boolean online;
+    private boolean inPerson;
     private String onlineLink;
 
-    public Course (String title, String date, String location, int capacity, String description, boolean online, boolean inPerson) {
-        super(title, date, location, capacity, "Course");
+    public Course (String title, String date, String location, String onlineLink, int capacity, String description, boolean online, boolean inPerson) {
+        super(title, date, "-", capacity, "Course");
         this.online = online;
         this.inPerson = inPerson;
+        this.onlineLink = onlineLink;
     }
 
     @Override

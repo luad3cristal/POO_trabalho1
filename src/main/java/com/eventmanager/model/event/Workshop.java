@@ -3,14 +3,15 @@ package com.eventmanager.model.event;
 import  com.eventmanager.model.participant.Participant;
 
 public class Workshop extends Event implements HybridEvent {
-    private boolean  online;
-    private boolean  inPerson;
+    private boolean online;
+    private boolean inPerson;
     private String onlineLink;
 
-    public Workshop (String title, String date, String location, int capacity, String description, boolean online, boolean inPerson) {
+    public Workshop (String title, String date, String location, String onlineLink, int capacity, String description, boolean online, boolean inPerson) {
         super(title, date, location, capacity, "Workshop");
         this.online = online;
         this.inPerson = inPerson;
+        this.onlineLink = onlineLink;
     }
 
     @Override

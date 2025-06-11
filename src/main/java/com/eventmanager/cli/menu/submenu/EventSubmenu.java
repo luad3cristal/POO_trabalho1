@@ -15,7 +15,7 @@ import com.eventmanager.util.MenuUtils;
 public class EventSubmenu {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static final EventController controller = EventController.getInstance();
+    private static final EventController eventController = EventController.getInstance();
 
 
     public static void exibirMenu() {
@@ -83,14 +83,6 @@ public class EventSubmenu {
             }
         } while (capacity <= 0);
 
-        String location;
-        do {
-            System.out.print("Location (can be '-' if not applicable): ");
-            location = scanner.nextLine();
-            if (location.isBlank()) {
-                System.out.println("Location cannot be empty. Use '-' if not applicable.");
-            }
-        } while (location.isBlank());
 
         Boolean isOnline = null;
         while (isOnline == null) {
@@ -103,6 +95,20 @@ public class EventSubmenu {
             }
         }
 
+        String onlineLink = "-";
+        if (isOnline) {
+            while (onlineLink == null) {
+                System.out.print("What is the link? (Use '-' if it is unknown): ");
+                String input = scanner.nextLine();
+                if (InputValidator.isValidURL(input)) {
+                    onlineLink = input;
+                } else {
+                    System.out.println("Please enter a proper link. Use '-' if it is unknown.");
+                }
+            }
+        }
+       
+
         Boolean isInPerson = null;
         while (isInPerson == null) {
             System.out.print("Is the event in-person? (true/false): ");
@@ -112,6 +118,17 @@ public class EventSubmenu {
             } else {
                 System.out.println("Please enter 'true' or 'false'.");
             }
+        }
+
+        String location = "-";
+        if (isInPerson) {
+            do {
+                System.out.print("Location (can be '-' if it is unknown): ");
+                location = scanner.nextLine();
+                if (location.isBlank()) {
+                    System.out.println("Location cannot be empty. Use '-' if it is unknown.");
+                }
+            } while (location.isBlank());
         }
 
         int type = -1;
@@ -128,15 +145,15 @@ public class EventSubmenu {
         scanner.nextLine();
 
         Event event = switch (type) {
-            case 1 -> new Lecture(title, date, location, capacity, "Lecture", isOnline, isInPerson);
-            case 2 -> new Workshop(title, date, location, capacity, "Workshop", isOnline, isInPerson);
-            case 3 -> new Course(title, date, location, capacity, "Course", isOnline, isInPerson);
-            case 4 -> new Fair(title, date, location, capacity, "Fair", isOnline, isInPerson);
+            case 1 -> new Lecture(title, date, location, onlineLink, capacity, "Lecture", isOnline, isInPerson);
+            case 2 -> new Workshop(title, date, location, onlineLink, capacity, "Workshop", isOnline, isInPerson);
+            case 3 -> new Course(title, date, location, onlineLink, capacity, "Course", isOnline, isInPerson);
+            case 4 -> new Fair(title, date, location, onlineLink, capacity, "Fair", isOnline, isInPerson);
             default -> null;
         };
 
         if (event != null) {
-            controller.addEvent(event);
+            eventController.addEvent(event);
             System.out.println("Event created successfully.");
         } else {
             System.out.println("Failed to create event. Please try again.");
@@ -147,7 +164,7 @@ public class EventSubmenu {
 
     private static void listEvents() {
         MenuUtils.clearScreen();
-        var list = controller.listAllEvents();
+        var list = eventController.listAllEvents();
         if (list.isEmpty()) {
             System.out.println("No events found.");
         } else {
@@ -188,7 +205,7 @@ public class EventSubmenu {
             }
         } while (true);
 
-        boolean updated = controller.updateEvent(title,
+        boolean updated = eventController.updateEvent(title,
             newDate.isBlank() ? null : newDate,
             newLocation.isBlank() ? null : newLocation,
             capacity);
@@ -205,7 +222,7 @@ public class EventSubmenu {
         if (title.isBlank()) {
             System.out.println("Title cannot be empty.");
         } else {
-            boolean deleted = controller.removeByTitle(title);
+            boolean deleted = eventController.removeByTitle(title);
             System.out.println(deleted ? "Event removed." : "Event not found.");
         }
         MenuUtils.pause();
