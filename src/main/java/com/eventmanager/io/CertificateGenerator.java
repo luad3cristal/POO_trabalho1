@@ -44,6 +44,18 @@ public class CertificateGenerator {
         String certificateId = IdGenerator.generateCertificateId();
         String text = generateCertificateText(participant, event, certificateId);
 
+        File file = new File(outputPath);
+
+        // Criar diretório pai se não existir
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            boolean created = parentDir.mkdirs();
+            if (!created) {
+                System.err.println("Não foi possível criar o diretório para salvar o certificado.");
+                return;
+            }
+        }
+
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage(PDRectangle.A4);
             document.addPage(page);
@@ -62,7 +74,6 @@ public class CertificateGenerator {
                 content.endText();
             }
 
-            File file = new File(outputPath);
             document.save(file);
             System.out.println("Certificate PDF saved to: " + file.getAbsolutePath());
         } catch (IOException e) {
