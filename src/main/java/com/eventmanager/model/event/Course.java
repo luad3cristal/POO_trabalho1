@@ -26,6 +26,7 @@ public class Course extends Event implements HybridEvent {
             return;
         }
 
+        System.out.println("Student subscribed sucessfully.");
         participants.add(p);
     }
 

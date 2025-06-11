@@ -20,6 +20,7 @@ public class Lecture extends Event implements HybridEvent {
             System.out.println("Lecture is already full. Cannot register: " + p.getName());
         }
 
+        System.out.println("Participant subscribed sucessfully.");
         participants.add(p);
     }
 

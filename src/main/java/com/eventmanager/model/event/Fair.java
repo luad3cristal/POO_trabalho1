@@ -20,6 +20,7 @@ public class Fair extends Event implements HybridEvent {
             System.out.println("Fair is already full. Cannot register: " + p.getName());
         }
 
+        System.out.println("Participant subscribed sucessfully.");
         participants.add(p);
     }
 
